@@ -2,7 +2,7 @@
 
 #Before you begin, ensure you have met the following requirements:
 
-- Cocos Creator (version X.X.X or higher) installed. [Download here](https://www.cocos.com/en/creator).
+- Cocos Creator (version 2.4.7 or higher) installed. [Download here](https://www.cocos.com/en/creator).
 - Node.js and npm (for package management and scripting tasks). [Download here](https://nodejs.org/).
 - A web browser or platform to run the project.
 ### Installation
@@ -21,3 +21,9 @@
 /build          # Build output directory
 /package.json   # Node.js package configuration
 /README.md      # This file
+
+2. ** Open the project in Cocos Creator
+  Now opne your Cocos Dashboard on Left Side your find the project under Home, click on project and then add project and select the folder where you have clone the repoisitory add the editor Version 2.4.7
+
+3. **Run the Project
+   At the top toolbar in editor Select "Browser" from dropdown and Click on the "Play" button (a triangle icon) to run the project.
