@@ -10,7 +10,7 @@
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/your-cocos-project.git
+   git clone https://github.com/arpitrana717/Cocos-Platform.git
    cd your-cocos-project
 
    npm install
