@@ -26,10 +26,11 @@ jobs:
       - name: Install cocos-cli
         run: npm install -g cocos-cli
 
+      - name: Add npm global bin to PATH
+        run: echo "$(npm bin -g)" >> $GITHUB_PATH
+
       - name: Verify cocos-cli installation
-        run: |
-          which cocos-cli
-          cocos-cli --version
+        run: cocos-cli --version
 
       - name: Build Project
         run: npm run build
