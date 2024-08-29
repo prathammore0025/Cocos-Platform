@@ -18,12 +18,17 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20.17.0'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Push changes to main branch
-        uses: JamesIves/github-pages-deploy-action@4.1.0
-        with:
-            branch: main
+      - name: Checkout main branch
+        run: |
+          git fetch origin main
+          git checkout main
+
+      - name: Merge dev into main
+        run: |
+          git merge dev --no-ff -m "Merge dev into main"
+          git push origin main
