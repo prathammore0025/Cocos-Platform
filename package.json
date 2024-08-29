@@ -10,6 +10,6 @@
     "cocos-cli": "^0.1.25"
   },
   "scripts": {
-    "build": "cocos build --target web-mobile --build-path=build"
+    "build": "cocos build --target web-mobile"
   }
 }

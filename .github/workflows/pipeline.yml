@@ -2,6 +2,7 @@ name: Build Cocos Project
 
 on:
   push:
+  pull_request:
     branches:
       - dev
 
@@ -25,10 +26,20 @@ jobs:
       run: npm install
 
     - name: Build Cocos Project
-      run: cocos build --target web-mobile --build-path=build
+      run: cocos build --target web-mobile
 
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v3
       with:
         name: build-artifacts
         path: build
+
+    - name: Push artifact to main branch
+      run: |
+          git config --local user.email "prathm@example.com"
+          git config --local user.name "prathm"
+          git checkout main
+          cp -R artifact/* .
+          git add .
+          git commit -m "Add artifact from dev branch"
+          git push origin main
