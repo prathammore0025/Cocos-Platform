@@ -20,21 +20,24 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Install cocos-cli
-        run: npm install -g cocos-cli
-
-      - name: Print global npm bin path
-        run: echo "$(npm bin -g)"
-
-      - name: List global npm packages
-        run: npm list -g --depth=0
-
-      - name: Check `cocos-cli` path
+      - name: Print Node.js and npm paths
         run: |
-          echo $(which cocos-cli)
+          echo "Node.js version: $(node --version)"
+          echo "npm version: $(npm --version)"
+          echo "Global npm bin path: $(npm bin -g)"
+
+      - name: Add global npm bin to PATH
+        run: echo "$(npm bin -g)" >> $GITHUB_PATH
+
+      - name: Reinstall cocos-cli
+        run: |
+          npm install -g cocos-cli
+          echo "$(npm bin -g)"
+          npm list -g --depth=0
+
+      - name: Check cocos-cli
+        run: |
+          which cocos-cli
           cocos-cli --version
 
       - name: Build Project
