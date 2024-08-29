@@ -2,8 +2,8 @@
   "name": "your-project-name",
   "version": "1.0.0",
   "scripts": {
-    "build": "cocos-cli build --platform web-desktop"
-  },
+      "build": "cocos build --platform web-mobile --build-path build"
+    }
   "dependencies": {
     "async": "^3.2.5",
     "async-es": "^3.2.5",

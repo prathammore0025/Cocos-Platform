@@ -1,52 +1,31 @@
-name: CI/CD Pipeline
+name: Build and Push Artifact (JavaScript Project)
 
 on:
-  push:
-    branches: [dev]
-  workflow_dispatch:
+  pull_request:
+    branches: [ dev ]
 
 jobs:
-  build_and_deploy:
+  build-and-push:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout dev branch
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies (npm)
+        run: npm ci
+
+      - name: Build artifact (Cocos CLI)
+        # Assuming your build command uses Cocos CLI
+        run: |
+          # Replace with your actual Cocos CLI build command
+          cocos build --target web-mobile --build-path=build
+
+      - name: Create artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-artifact
+          path: build
+
+      - name: Push artifact to main branch
         uses: actions/checkout@v3
         with:
-          ref: dev
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      - name: Print Node.js and npm paths
-        run: |
-          echo "Node.js version: $(node --version)"
-          echo "npm version: $(npm --version)"
-          echo "Global npm bin path: $(npm bin -g)"
-
-      - name: Add global npm bin to PATH
-        run: echo "$(npm bin -g)" >> $GITHUB_PATH
-
-      - name: Reinstall cocos-cli
-        run: |
-          npm install -g cocos-cli
-          echo "$(npm bin -g)"
-          npm list -g --depth=0
-
-      - name: Check cocos-cli
-        run: |
-          which cocos-cli
-          cocos-cli --version
-
-      - name: Build Project
-        run: cocos-cli build --platform web-desktop
-
-      - name: Push changes to main branch
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git checkout main
-          git merge dev --no-ff -m "Merge dev into main"
-          git push origin main
+          ref: main
