@@ -23,10 +23,15 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Checkout main branch
+      - name: Checkout or create main branch
         run: |
           git fetch origin main
-          git checkout main
+          git checkout main || git checkout -b main
+
+      - name: Configure Git user
+        run: |
+          git config user.name "prathm"
+          git config user.email "prathm@github.com"
 
       - name: Merge dev into main
         run: |
