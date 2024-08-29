@@ -30,10 +30,12 @@ jobs:
         run: echo "$(npm bin -g)" >> $GITHUB_PATH
 
       - name: Verify cocos-cli installation
-        run: cocos-cli --version
+        run: |
+          which cocos-cli
+          cocos-cli --version
 
       - name: Build Project
-        run: npm run build
+        run: cocos-cli build --platform web-desktop
 
       - name: Push changes to main branch
         run: |
