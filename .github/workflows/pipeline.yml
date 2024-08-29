@@ -1,7 +1,7 @@
 name: Build and Push Artifact (JavaScript Project)
 
 on:
-  pull_request:
+  push:
     branches: [ dev ]
 
 jobs:
