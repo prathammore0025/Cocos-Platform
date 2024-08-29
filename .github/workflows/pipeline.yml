@@ -6,42 +6,37 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout dev branch
         uses: actions/checkout@v3
+        with:
+          ref: dev
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.17.0'  # Use the required Node.js version
+          node-version: '18'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Install Cocos CLI
-        run: npm install -g cocos-cli 
-
-      - name: Build Project
-        run: npm run build:webgl  # Replace with the actual build command for Cocos WebGL
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev'
-
-    steps:
       - name: Checkout main branch
         uses: actions/checkout@v3
         with:
           ref: main
+          path: main
 
-      - name: Copy build output and commit changes
+      - name: Copy files from dev branch to main branch
         run: |
-          # Copy build artifacts from the build job
-          cp -r ../build/* .
+          cp -r ./* ../main
+          cd ../main
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
           git add .
-          git commit -m "Deploy build artifacts to main branch"
+          git commit -m "Sync dev branch to main branch"
           git push origin main
+
+          
