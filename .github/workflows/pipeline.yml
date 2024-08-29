@@ -29,14 +29,10 @@ jobs:
           ref: main
           path: main
 
-      - name: Copy files from dev branch to main branch
+      - name: Push changes to main branch
         run: |
-          cp -r ./* ../main
-          cd ../main
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add .
-          git commit -m "Sync dev branch to main branch"
-          git push origin main
-
-          
+            git config user.name "GitHub Actions"
+            git config user.email "actions@github.com"
+            git checkout main
+            git merge dev
+            git push origin main
