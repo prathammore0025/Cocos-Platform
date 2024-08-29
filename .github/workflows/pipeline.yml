@@ -26,6 +26,11 @@ jobs:
       - name: Install cocos-cli
         run: npm install -g cocos-cli
 
+      - name: Verify cocos-cli installation
+        run: |
+          which cocos-cli
+          cocos-cli --version
+
       - name: Build Project
         run: npm run build
 
@@ -36,5 +41,3 @@ jobs:
           git checkout main
           git merge dev --no-ff -m "Merge dev into main"
           git push origin main
-
-          
