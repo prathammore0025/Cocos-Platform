@@ -1,4 +1,4 @@
-name: Build Cocos Project
+name: Build and Deploy Cocos Project
 
 on:
   push:
@@ -22,20 +22,26 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Checkout or create main branch
+    # - name: Build Project
+    #   run: npm run build
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout dev branch
+      uses: actions/checkout@v3
+      with:
+        ref: dev
+
+    - name: Create or switch to main branch
       run: |
         git fetch origin main
         git checkout main || git checkout -b main
 
-    - name: Pull latest changes from main
-      run: git pull origin main
-
-    - name: Configure Git user
+    - name: Copy build folder from dev to main
       run: |
-        git config user.name "prathm"
-        git config user.email "prathm@github.com"
-
-    - name: Merge dev into main
-      run: |
-        git merge dev --allow-unrelated-histories --no-ff -m "Merge dev into main"
+        git checkout dev -- build/
+        git add build/
+        git commit -m "Update build folder from dev"
         git push origin main
