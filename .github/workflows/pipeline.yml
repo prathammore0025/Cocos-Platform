@@ -22,16 +22,13 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    # - name: Build Project
-    #   run: npm run build
-
-    - name: Fetch dev branch
-      run: git fetch origin dev
-
     - name: Checkout or create main branch
       run: |
         git fetch origin main
         git checkout main || git checkout -b main
+
+    - name: Pull latest changes from main
+      run: git pull origin main
 
     - name: Configure Git user
       run: |
@@ -40,5 +37,5 @@ jobs:
 
     - name: Merge dev into main
       run: |
-        git merge origin/dev --allow-unrelated-histories --no-ff -m "Merge dev into main"
+        git merge dev --allow-unrelated-histories --no-ff -m "Merge dev into main"
         git push origin main
