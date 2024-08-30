@@ -27,4 +27,3 @@
 
 3. **Run the Project
    At the top toolbar in editor Select "Browser" from dropdown and Click on the "Play" button (a triangle icon) to run the project.
-   
