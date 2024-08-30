@@ -5,5 +5,11 @@
     "axios": "^1.7.2",
     "jsonwebtoken": "^9.0.2",
     "socket.io-client": "^4.7.5"
+  },
+  "devDependencies": {
+    "cocos-cli": "^0.1.25"
+  },
+  "scripts": {
+    "build": "cocos build --target web-mobile"
   }
 }
