@@ -22,13 +22,13 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    # Uncomment the following line if you want to run the build step
+    # Uncomment if you want to build the project
     # - name: Build Project
     #   run: npm run build
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build  # Ensure the deploy job runs only after the build job succeeds
+    needs: build  
 
     steps:
     - name: Checkout main branch
@@ -47,10 +47,10 @@ jobs:
         git config user.name "prathm"
         git config user.email "prathm@example.com"
 
-    - name: Copy and update build folder
+    - name: Forcefully remove and update build folder
       run: |
         rm -rf build/
         cp -r dev/build build/
-        git add build/
+        git add -f build/
         git commit -m "Update build folder from dev"
         git push origin main
