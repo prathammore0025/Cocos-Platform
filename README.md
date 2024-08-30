@@ -35,9 +35,6 @@ This project demonstrates the use of GitHub Actions for continuous integration a
 - Ensure you have a GitHub repository with a `dev` and `main` branch.
 - Place the workflow file under the `.github/workflows` directory in your repository.
 
-### Build
-- To enable the build step, uncomment the **Build Project** step in the workflow file.
-
 ### Deploy
 - The deploy job will automatically execute after a successful build, updating the build folder in the `main` branch.
 
