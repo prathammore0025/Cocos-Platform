@@ -43,6 +43,6 @@ jobs:
     - name: Copy build folder from dev to main
       run: |
         git checkout dev -- build/
-        git add build/
+        git add -f build/
         git commit -m "Update build folder from dev"
         git push origin main
