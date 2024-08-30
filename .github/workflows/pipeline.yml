@@ -14,32 +14,19 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Node.js
+    - name: Setup Node.js
       uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-
-    - name: Install Cocos CLI
-      run: npm install -g cocos-cli
+          with:
+            node-version: 18
 
     - name: Install dependencies
-      run: npm install
+          run: npm install
 
-    - name: Build Cocos Project
-      run: cocos build --target web-mobile
+    - name: Build Project
+          run: npm run build
 
-    - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: build-artifacts
-        path: build
-
-    - name: Push artifact to main branch
-      run: |
-          git config --local user.email "prathm@example.com"
-          git config --local user.name "prathm"
-          git checkout main
-          cp -R artifact/* .
-          git add .
-          git commit -m "Add artifact from dev branch"
-          git push origin main
+    - name: Deploy to GitHub Pages
+          uses: JamesIves/github-pages-deploy-action@4.1.0
+          with:
+            branch: gh-pages
+            folder: build
