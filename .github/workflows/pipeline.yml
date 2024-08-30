@@ -25,6 +25,9 @@ jobs:
     # - name: Build Project
     #   run: npm run build
 
+    - name: Fetch dev branch
+      run: git fetch origin dev
+
     - name: Checkout or create main branch
       run: |
         git fetch origin main
@@ -37,5 +40,5 @@ jobs:
 
     - name: Merge dev into main
       run: |
-        git merge dev --allow-unrelated-histories --no-ff -m "Merge dev into main"
+        git merge origin/dev --allow-unrelated-histories --no-ff -m "Merge dev into main"
         git push origin main
