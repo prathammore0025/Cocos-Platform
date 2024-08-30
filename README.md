@@ -12,7 +12,7 @@ This project demonstrates the use of GitHub Actions for continuous integration a
 1. **Checkout code:** Checks out the repository code.
 2. **Setup Node.js:** Sets up Node.js environment (version 18).
 3. **Install dependencies:** Installs project dependencies using `npm install`.
-4. **Build Project (Commented Out):** Build the project using `npm run build`. Uncomment this step if you want to include the build process.
+4. **Build Project (Commented Out):** Build the project using `npm run build`. 
 
 ### Deploy Job
 - **Trigger:** Runs after the build job.
